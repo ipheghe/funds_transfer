@@ -1,0 +1,62 @@
+@import "../../common/mixins.scss";
+
+.table-wrapper {
+  width: 100%;
+  margin-bottom: 100px;
+
+  .btn {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    &:focus {
+      border: none;
+    }
+  }
+
+  .table-row {
+    background-color: #FFF;
+    display: flex;
+    padding: 0.9375rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ddd;
+
+    &:nth-child(even) {
+      background-color: #f2f2f2
+    }
+  }
+
+  .table-header {
+    background-color: #57CCCb;
+    text-transform: capitalize;
+    padding-bottom: 0.5375rem;
+    
+    span {
+      color: black;
+    }
+  }
+
+  .table-col {
+    flex: 1;
+  }
+
+  .table-col-10 {
+    @include column-width(10%, left)
+  }
+
+  .table-col-20 {
+    @include column-width(20%, left)
+  }
+
+  .table-col-30 {
+    @include column-width(30%, left)
+  }
+
+  .table-col-40 {
+    @include column-width(40%, left)
+  }
+
+  .table-col-50 {
+    @include column-width(50%, left)
+  }
+}

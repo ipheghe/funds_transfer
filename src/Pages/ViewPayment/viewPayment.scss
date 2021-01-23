@@ -1,0 +1,31 @@
+.view__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .view__subcontainer {
+        width: 100%;
+        height: 100%;
+        border: 1px solid rgb(70, 64, 64);
+        padding: 20px;
+
+        .div-block {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: auto;
+            margin-top: 10px;
+
+            .view-text {
+                font-size: 16px;
+                color: black;
+
+                &.bold {
+                    font-weight: bold;
+                }
+            }
+        }
+    } 
+
+}

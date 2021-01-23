@@ -1,0 +1,5 @@
+@mixin column-width($width, $text-direction) {
+    width: $width;
+    text-align: $text-direction;
+    padding-right: 0.6rem;
+  }

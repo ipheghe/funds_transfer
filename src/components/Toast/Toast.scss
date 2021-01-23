@@ -1,0 +1,56 @@
+@import '../../common/functions.scss';
+
+.toast__container {
+  min-width: rem(250px);
+  margin-left: rem(-125px);
+  text-align: center;
+  z-index: 12;
+  border-radius: rem(2px);
+  padding: rem(16px);
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: rem(100px);
+  -webkit-animation: fadein 1s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+
+  p {
+    color: #FFF;
+    font-size: rem(17px);
+  }
+}
+
+.error {
+  background-color: red;
+}
+
+.success {
+  background-color: green;
+}
+
+@media screen and (max-width: rem(450px)) {
+  .toast__container {
+    max-width: 150px;
+  }
+}
+
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: rem(100px); opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: rem(100px); opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: rem(100px); opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: rem(100px); opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
