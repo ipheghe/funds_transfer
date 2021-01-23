@@ -4,6 +4,17 @@
   display: flex;
 }
 
+.app__subcontainer {
+  width: 100%;
+  padding-left: 300px;
+}
+
+@media screen and (max-width: 800px) {
+  .app__subcontainer {
+    padding-left: 150px;
+  }
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

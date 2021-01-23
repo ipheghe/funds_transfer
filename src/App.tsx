@@ -61,7 +61,7 @@ function App(props: any) {
     <Router>
       <div className="App">
         <SideNav />
-        <div style={{ width: '100%' }}>
+        <div className="app__subcontainer" style={{ width: '100%' }}>
           {message && <Toast message={message} className={className} />}
           <Switch>
           <Route

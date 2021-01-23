@@ -30,3 +30,14 @@
     }
 
 }
+
+@media screen and (max-width: 800px) {
+    .sidenav__container {
+        width: 150px;
+        max-width: 150px;
+
+        .sidenav__list {
+            font-size: 1rem;
+        }
+    }
+  }

@@ -8,4 +8,5 @@ export interface IInputProps {
     value: string | number;
     className?: string;
     placeholder?: string;
+    disabled?: boolean;
 }

@@ -2,7 +2,6 @@
 
 .toast__container {
   min-width: rem(250px);
-  margin-left: rem(-125px);
   text-align: center;
   z-index: 12;
   border-radius: rem(2px);
@@ -33,7 +32,6 @@
     max-width: 150px;
   }
 }
-
 
 @-webkit-keyframes fadein {
   from {bottom: 0; opacity: 0;} 

@@ -50,9 +50,13 @@ function FundsTransfer (props: ITransferProps) {
 
     const handleClick = async () => {
         await verifyAccount({ number: values.accountNumber, code: selectedBank })
-        .then(() => {
+        .then((res: any) => {
             props.showMessage('Account Verified Successfully', 'success')
             setButtonDisability(false);
+            setValues(prev => ({
+                ...prev,
+                fullName: res.data.data['account_name']
+            }))
         })
         .catch(() =>  props.showMessage('Something went wrong, please try again!', 'error'))
     }
@@ -76,7 +80,8 @@ function FundsTransfer (props: ITransferProps) {
                     type="text"
                     onChange={handleChange}
                     value={values.fullName}
-                    placeholder="Enter Full Name"
+                    placeholder="Full Name"
+                    disabled
                 />
                 <Input
                     name="accountNumber"
