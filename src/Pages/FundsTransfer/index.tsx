@@ -108,7 +108,7 @@ function FundsTransfer (props: ITransferProps) {
                     value={values.amount}
                     placeholder="Enter Amount"
                 />
-                <button type="submit" disabled={isButtonDisabled && values.amount >= 100 && values.amount <= 10000000}>
+                <button type="submit" disabled={isButtonDisabled || !values.fullName}>
                     Make Payment
                 </button>
             </form>
