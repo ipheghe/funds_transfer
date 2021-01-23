@@ -2,5 +2,5 @@
  * @interface IPaymentProps
  */
 export interface IPaymentProps {
-    transfers: any;
+    showMessage: (x: string, y: string) => void;
 }

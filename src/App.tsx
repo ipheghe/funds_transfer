@@ -11,37 +11,23 @@ import './App.css';
 
 function App(props: any) {
 
-  const [transfers, setTransfers] = useState<Array<{}>>([]);
   const [banks, setBanks] = useState<Array<{}>>([]);
   const [message, setMessage] = useState('');
   const [className, setClassName] = useState('');
 
-  useEffect( () => {
+  useEffect(() => {
+    getBankList();
+  },[])
 
-    getList();
-  }, [])
-
-  const getList = async () => {
-    const response = await getBanks();
-    if (response.data.status === 'Success') {
-    
-      setBanks(response.data.data)
-    }
-    return response;
+  const getBankList = async () => {
+    await getBanks().then((response) => setBanks(response.data.data))
+      .catch(() => showMessage('Error fetching bank list!', 'error'));
   }
 
   const handleSubmit = async (payload: any): Promise<any> => {
     await transferFunds(payload)
-    .then((response: any) => {
-      if (response?.data?.status === 'Success') {
-        const findBank: any = banks.find((item:any)=> item.code === payload.selectedBank);
-        const newDate = new Date(response.data.data.createdAt).toDateString();
-        const newTransfers = [...transfers, { ...response.data.data, name: payload.fullName, bank: findBank.name, formattedDate: newDate }];
-        setTransfers(newTransfers);
-        showMessage('Funds Transfered Successfully', 'success')
-      } 
-    }).catch(() => showMessage('Something went wrong, please try again!', 'error'));
-
+    .then(() => showMessage('Funds Transfered Successfully', 'success'))
+      .catch(() => showMessage('Something went wrong, please try again!', 'error'));
   }
 
   /**
@@ -94,7 +80,7 @@ function App(props: any) {
               render={props => (
                 <Payments
                   {...props}
-                  transfers={transfers}
+                  showMessage={showMessage}
                 />
               )}
             />

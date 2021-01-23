@@ -13,6 +13,9 @@ export const verifyAccount = async ({ number, code}: any) => {
     return await axios.get(`${apiUrl}/api/v1/verify?number=${number}&code=${code}`);
 };
 
+export const getTransfers = async () => {
+    return await axios.get(`${apiUrl}/api/v1/transfer`);
+};
 
 export const transferFunds = async (payload: any) => {
     const data = {

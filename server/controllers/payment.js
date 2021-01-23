@@ -69,13 +69,13 @@ export default class PaymentController {
       return axios.post(`${process.env.paystackUrl}/transferrecipient`, req.body, headers)
       .then(response => {
         // handle success
-        handleSuccessMessage(res, response.status, response.data.data, 'Account verified successfully!')
+        handleSuccessMessage(res, response.status, response.data.data, 'Transfer Recipient created successfully!')
       })
         .catch(err => handleErrorMessage(res, 500, err));
     }
 
     static transfer(req, res) {    
-      const { source, amount, recipient,  reason } = req.body;
+      const { source, amount, recipient } = req.body;
       if (!source || !amount || !recipient) {
         return handleErrorMessage(res, 400, 'Invalid resource')
       }
@@ -83,7 +83,16 @@ export default class PaymentController {
       return axios.post(`${process.env.paystackUrl}/transfer`, req.body, headers)
       .then(response => {
         // handle success
-        handleSuccessMessage(res, response.status, response.data.data, 'Account verified successfully!')
+        handleSuccessMessage(res, response.status, response.data.data, 'Funds Transferred successfully!')
+      })
+        .catch(err => handleErrorMessage(res, 500, err));
+    }
+
+    static getTransfers(req, res) {    
+      return axios.get(`${process.env.paystackUrl}/transfer`, headers)
+      .then(response => {
+        // handle success
+        handleSuccessMessage(res, response.status, response.data.data, 'Transfers retrieved successfully!')
       })
         .catch(err => handleErrorMessage(res, 500, err));
     }

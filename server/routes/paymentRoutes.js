@@ -29,4 +29,10 @@ paymentRoute.get(
   PaymentController.getBanks
 );
 
+// API route to get list of transfers
+paymentRoute.get(
+  '/api/v1/transfer',
+  PaymentController.getTransfers
+);
+
 export default paymentRoute;

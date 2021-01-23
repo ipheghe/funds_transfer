@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // components
 import Table from '../../components/Table';
@@ -6,6 +6,9 @@ import ViewPayment from '../ViewPayment';
 
 // interface
 import { IPaymentProps } from './payments';
+
+// actions 
+import { getTransfers } from '../../actions/paymentActions';
 
 const configuration = {
   serial: {
@@ -23,8 +26,18 @@ const configuration = {
 
 function Payments (props: IPaymentProps) {
   const [selected, setSelected] = useState(null);
+  const [transfers, setTransfers] =  useState([]);
 
-  if (!props.transfers.length) {
+  useEffect(() => {
+    getBankTransfers();
+  }, []);
+
+  const getBankTransfers = async () => {
+    await getTransfers().then((res: any) => setTransfers(res.data.data))
+      .catch(() => props.showMessage('Something went wrong, please try again!', 'error'));
+  }
+
+  if (!transfers.length) {
     return (
       <h1>No Records Yet!</h1>
     )
@@ -37,7 +50,7 @@ function Payments (props: IPaymentProps) {
         ) : (
           <div className="payments__container">
               <Table
-                data={props.transfers}
+                data={transfers}
                 config={configuration}
                 headers={Object.keys(configuration)}
                 onClick={setSelected}

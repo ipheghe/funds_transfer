@@ -40,6 +40,9 @@ const Table = ({ config, headers, data, onClick }: ITableProps) => {
   const renderTableBody = () => {
     const updatedData = data.map((item: any, index: number) => {
       item['serial'] = index + 1;
+      item['name'] = item['recipient']['name'];
+      item['formattedDate'] = new Date(item['createdAt']).toDateString();
+      item['bank'] = item['recipient']['details']['bank_name'];
       return item;
     });
 

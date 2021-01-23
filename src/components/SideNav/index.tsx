@@ -2,7 +2,7 @@ import React from 'react';
 import './sideNav.scss';
 import { NavLink } from 'react-router-dom';
 
-function SideNav (props: any) {
+function SideNav () {
 
     return (
         <div  className="sidenav__container">
