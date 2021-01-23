@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import path from 'path';
+import path from 'path'
 import open from 'open';
 import winston from 'winston';
 import dotEnv from 'dotenv';
@@ -19,8 +19,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use(express.static(__dirname + '/build/'));
-app.get('*', (req, res) => res
-  .sendFile(path.join( __dirname, './build/index.html')));
+// app.get('*', (req, res) => res
+//   .sendFile(path.join( __dirname, './build/index.html')));
 
 app.use(paymentRoute);
 
