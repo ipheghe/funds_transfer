@@ -65,7 +65,9 @@ function Payments (props: IPaymentProps) {
           <ViewPayment details={selected} />
         ) : (
           <div className="payments__container">
-            {isLoading ? <Loader /> : (
+            {isLoading ? (
+              <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '40px' }}><Loader style={{ width: '50px', height: '50px' }}/></div>
+            ) : (
               <Table
                 data={transfers}
                 config={configuration}
