@@ -1,4 +1,4 @@
-interface IBanks {
+export interface IBanks {
     name: string;
     slug: string;
     code: string;
@@ -20,7 +20,6 @@ interface IBanks {
  * @interface ITransferProps
  */
 export interface ITransferProps {
-    banks: IBanks[] | any;
+    banks: IBanks[];
     showMessage: (x: string, y: string) => void;
-    handleSubmit: (x: any) => void;
 }

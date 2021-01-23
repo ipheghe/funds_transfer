@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 // components
 import Input from '../../components/Input';
+import Loader from '../../components/Loader';
 
 // actions 
-import { verifyAccount } from '../../actions/paymentActions';
+import { verifyAccount, transferFunds } from '../../actions/paymentActions';
 
 // interface
 import { ITransferProps } from './fundsTransfer';
@@ -21,6 +22,8 @@ function FundsTransfer (props: ITransferProps) {
     const [selectedBank, setSelectedBank] = useState('select');
     const [isButtonDisabled, setButtonDisability] = useState(true);
     const [showVerifyButton, setVerifyButtonVisibility] =  useState(false);
+    const [loadingVerify, setLoadingVerify] = useState(false);
+    const [loadingTransfer, setLoadingTransfer] = useState(false);
 
     useEffect(() => {
         if (values.accountNumber && selectedBank !== 'select' && !showVerifyButton) {
@@ -49,6 +52,7 @@ function FundsTransfer (props: ITransferProps) {
     }
 
     const handleClick = async () => {
+        setLoadingVerify(true);
         await verifyAccount({ number: values.accountNumber, code: selectedBank })
         .then((res: any) => {
             props.showMessage('Account Verified Successfully', 'success')
@@ -57,16 +61,31 @@ function FundsTransfer (props: ITransferProps) {
                 ...prev,
                 fullName: res.data.data['account_name']
             }))
+            setLoadingVerify(false);
         })
-        .catch(() =>  props.showMessage('Something went wrong, please try again!', 'error'))
+        .catch(() =>  {
+            props.showMessage('Something went wrong, please try again!', 'error');
+            setLoadingVerify(false);
+        })
     }
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setLoadingTransfer(true);
         if (values.amount < 100 || values.amount > 10000000) {
-            props.showMessage('Amount must be greater than or equal to 100 or less than or equal to 10000000!', 'error')
+            props.showMessage('Amount must be greater than or equal to 100 or less than or equal to 10000000!', 'error');
+            setLoadingTransfer(false);
         } else {
-            props.handleSubmit({ ...values, selectedBank });
+            await transferFunds({ ...values, selectedBank })
+            .then(() => { 
+                props.showMessage('Funds Transfered Successfully', 'success');
+                setLoadingTransfer(false);
+
+            })
+              .catch(() => {
+                  props.showMessage('Something went wrong, please try again!', 'error');
+                  setLoadingTransfer(false);
+            });
         }
     }
 
@@ -98,7 +117,7 @@ function FundsTransfer (props: ITransferProps) {
                 </select>
                 {showVerifyButton && (
                     <button type="button" onClick={handleClick} className="btn-small">
-                        Verify Account
+                        { loadingVerify ? <Loader /> : 'Verify Account' }   
                     </button>
                 )}
                 <Input
@@ -109,7 +128,7 @@ function FundsTransfer (props: ITransferProps) {
                     placeholder="Enter Amount"
                 />
                 <button type="submit" disabled={isButtonDisabled || !values.fullName}>
-                    Make Payment
+                    { loadingTransfer ? <Loader /> : ' Make Payment' }       
                 </button>
             </form>
         </div>

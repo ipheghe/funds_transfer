@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+
+// components
 import Toast from './components/Toast';
 import Dashboard from './Pages/Dashboard';
 import FundsTransfer from './Pages/FundsTransfer';
 import Payments from './Pages/Payments';
 import SideNav from './components/SideNav';
-import { getBanks, transferFunds } from './actions/paymentActions';
+
+// actions
+import { getBanks } from './actions/paymentActions';
+
+//interface
+import { IBanks } from './Pages/FundsTransfer/fundsTransfer';
 
 import './App.css';
 
 function App(props: any) {
 
-  const [banks, setBanks] = useState<Array<{}>>([]);
+  const [banks, setBanks] = useState<Array<IBanks>>([]);
   const [message, setMessage] = useState('');
   const [className, setClassName] = useState('');
 
@@ -23,13 +30,7 @@ function App(props: any) {
     await getBanks().then((response) => setBanks(response.data.data))
       .catch(() => showMessage('Error fetching bank list!', 'error'));
   }
-
-  const handleSubmit = async (payload: any): Promise<any> => {
-    await transferFunds(payload)
-    .then(() => showMessage('Funds Transfered Successfully', 'success'))
-      .catch(() => showMessage('Something went wrong, please try again!', 'error'));
-  }
-
+  
   /**
    * This method shows toast message
    *
@@ -70,7 +71,6 @@ function App(props: any) {
                 <FundsTransfer
                   {...props}
                   banks={banks}
-                  handleSubmit={handleSubmit}
                   showMessage={showMessage}
                 />
               )}
