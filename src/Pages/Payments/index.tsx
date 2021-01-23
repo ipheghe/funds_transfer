@@ -53,7 +53,7 @@ function Payments (props: IPaymentProps) {
 
   }
 
-  if (!transfers.length) {
+  if (!transfers.length && !isLoading) {
     return (
       <h1>No Records Yet!</h1>
     )

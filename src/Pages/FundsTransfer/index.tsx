@@ -116,7 +116,7 @@ function FundsTransfer (props: ITransferProps) {
                     ))}
                 </select>
                 {showVerifyButton && (
-                    <button type="button" onClick={handleClick} className="btn-small">
+                    <button type="button" onClick={handleClick} className="btn-small" style={{ backgroundColor: loadingVerify ? 'transparent' : 'black' }}>
                         { loadingVerify ? <Loader /> : 'Verify Account' }   
                     </button>
                 )}
@@ -127,7 +127,7 @@ function FundsTransfer (props: ITransferProps) {
                     value={values.amount}
                     placeholder="Enter Amount"
                 />
-                <button type="submit" disabled={isButtonDisabled || !values.fullName}>
+                <button type="submit" disabled={isButtonDisabled || !values.fullName} style={{ backgroundColor: loadingTransfer ? 'transparent' : 'black' }}>
                     { loadingTransfer ? <Loader /> : ' Make Payment' }       
                 </button>
             </form>
