@@ -16,7 +16,7 @@ import { IBanks } from './Pages/FundsTransfer/fundsTransfer';
 
 import './App.css';
 
-function App(props: any) {
+function App() {
 
   const [banks, setBanks] = useState<Array<IBanks>>([]);
   const [message, setMessage] = useState('');
@@ -30,7 +30,7 @@ function App(props: any) {
     await getBanks().then((response) => setBanks(response.data.data))
       .catch(() => showMessage('Error fetching bank list!', 'error'));
   }
-  
+
   /**
    * This method shows toast message
    *
